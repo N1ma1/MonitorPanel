@@ -6,5 +6,5 @@ If you help me, we can make it better.
 
 #### if you want help
 #### just do these all
-[] test showing two monitor in panel
-[] make colors better and more lovely than defult
+- [] test showing two monitor in panel
+- [] make colors better and more lovely than defult
