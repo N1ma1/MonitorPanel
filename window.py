@@ -45,3 +45,6 @@ class Window(QMainWindow):
             painter[i].drawRect(l, t, w/3, h/3)
             i += 1
             l += (w/3) + 5
+        if l > 680 :
+            # we need a Vertical scrool bar
+            pass
