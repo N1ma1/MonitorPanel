@@ -1,6 +1,6 @@
 
 from PyQt5 import QtGui
-from PyQt5.QtWidgets import QApplication, QMainWindow
+from PyQt5.QtWidgets import QApplication, QListWidget, QMainWindow, QPushButton
 from PyQt5.QtGui import QPainter, QBrush, QPen
 from PyQt5.QtCore import QPoint, Qt
 import os
@@ -22,7 +22,20 @@ class Window(QMainWindow):
         self.setWindowIcon(QtGui.QIcon("icon.png"))
         self.setWindowTitle(self.title)
         self.setGeometry(self.top, self.left, self.width, self.height)
-        self.show()
+        self.design_layout()
+        self.monitor_list = QListWidget(self)
+        self.monitor_list.setGeometry(150,20,200,80)
+        self.m_list()
+
+    def m_list(self):
+        st = os.popen('xrandr --listmonitors')
+        output = st.read()
+        i = 0
+        for monitor in output.split('\n'):
+            if(monitor.startswith("Monitors:") or monitor == ""):
+                continue
+            self.monitor_list.insertItem(i,monitor.split('/')[0])
+            i += 1
 
     def paintEvent(self, e):
         st = os.popen("xrandr --listmonitors")
@@ -48,3 +61,15 @@ class Window(QMainWindow):
         if l > 680 :
             # we need a Vertical scrool bar
             pass
+    
+    def design_layout(self):
+        move_monitor_right = QPushButton("move monitor right",self)
+        move_monitor_right.setGeometry(20,20,100,20)
+        move_monitor_right.setFont(QtGui.QFont("Arial", 8))
+        # move_monitor_right.clicked.connect(self.move_monitor_right)
+
+        move_monitor_left = QPushButton("move monitor left",self)
+        move_monitor_left.setGeometry(20,45,100,20)
+        move_monitor_left.setFont(QtGui.QFont("Arial", 8))
+        # move_monitor_left.clicked.connect(self.move_monitor_left)
+
