@@ -51,7 +51,7 @@ class Window(QMainWindow):
             h = int(monitor_size.split('x')[0])
             w = int(monitor_size.split('x')[1])
             painter.append(QPainter(self))
-            painter[i].setPen(QPen(Qt.black, 5))
+            painter[i].setPen(QPen(Qt.black, 2.5))
             painter[i].drawText(QPoint(l + 15, (h/6) + t), str(h)+"px")
             painter[i].drawText(QPoint((w/6)+l, t + 15), str(w)+"px")
 
