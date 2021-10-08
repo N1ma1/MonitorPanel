@@ -3,7 +3,7 @@ from PyQt5 import QtGui
 from PyQt5.QtWidgets import QApplication, QListWidget, QMainWindow, QPushButton
 from PyQt5.QtGui import QPainter, QBrush, QPen
 from PyQt5.QtCore import QPoint, Qt
-import os
+import subprocess
 
 
 class Window(QMainWindow):
@@ -28,8 +28,7 @@ class Window(QMainWindow):
         self.m_list()
 
     def m_list(self):
-        st = os.popen('xrandr --listmonitors')
-        output = st.read()
+        output = subprocess.run("xrandr --listmonitors",shell=True,capture_output=True,text=True).stdout
         i = 0
         for monitor in output.split('\n'):
             if(monitor.startswith("Monitors:") or monitor == ""):
@@ -38,8 +37,7 @@ class Window(QMainWindow):
             i += 1
 
     def paintEvent(self, e):
-        st = os.popen("xrandr --listmonitors")
-        output = st.read()
+        output = subprocess.run("xrandr --listmonitors",shell=True,capture_output=True,text=True).stdout
         painter = []
         i = 0
         t = 350
